@@ -62,7 +62,7 @@ function App() {
 
     const goodCount = data.filter((it) => it.emotion >= 3).length;
     const badCount = data.length - goodCount;
-    const goodRatio = (goodCount / data.length) * 100;
+    const goodRatio = parseInt((goodCount / data.length) * 100);
     return { goodCount, badCount, goodRatio };
   }, [data.length]);
 
