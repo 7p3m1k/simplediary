@@ -49,18 +49,24 @@ function App() {
     setData((data) => [newItem, ...data]);
   }, []);
 
-  const onRemove = (targetId) => {
-    const newDiaryList = data.filter((it) => it.id !== targetId);
-    setData(newDiaryList);
-  };
+  // 전
+  // const onRemove = (targetId) => {
+  //   const newDiaryList = data.filter((it) => it.id !== targetId);
+  //   setData(newDiaryList);
+  // };
 
-  const onEdit = (targetId, newContet) => {
-    setData(
+  // 후 useCallback
+  const onRemove = useCallback((targetId) => {
+    setData((data) => data.filter((it) => it.id !== targetId));
+  }, []);
+
+  const onEdit = useCallback((targetId, newContet) => {
+    setData((data) =>
       data.map((it) =>
         it.id === targetId ? { ...it, content: newContet } : it
       )
     );
-  };
+  }, []);
 
   const getDiaryAnalysis = useMemo(() => {
     const goodCount = data.filter((it) => it.emotion >= 3).length;
